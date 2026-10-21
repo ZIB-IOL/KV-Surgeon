@@ -1,0 +1,47 @@
+This repository is licensed under the MIT License (see LICENSE), except for
+the third-party material listed below.
+
+Attention Matching
+------------------
+This code base is derived from https://github.com/adamzweiger/compaction
+(Zweiger et al., "Fast KV Compaction via Attention Matching", arXiv:2602.16284),
+MIT License, Copyright (c) 2026 Adam Zweiger.
+
+Hugging Face Transformers
+-------------------------
+The following files are modified copies of files from Hugging Face
+Transformers 4.57.1 (https://github.com/huggingface/transformers), licensed
+under the Apache License 2.0 (see LICENSES/Apache-2.0.txt). Each file keeps its
+original copyright header and states how it was modified.
+
+  models/llama/modeling_llama.py
+  models/qwen3/modeling_qwen3.py
+  models/qwen3_moe/modeling_qwen3_moe.py
+  models/gemma3/modeling_gemma3.py
+
+Cartridges
+----------
+compaction/query_generation/self_study.py is adapted from Cartridges
+(https://github.com/HazyResearch/cartridges), licensed under the Apache
+License 2.0 (see LICENSES/Apache-2.0.txt).
+
+Data
+----
+data/QuALITY.v1.0.1.htmlstripped.dev is part of QuALITY
+(Pang et al., 2022, https://github.com/nyu-mll/quality), distributed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0,
+https://creativecommons.org/licenses/by/4.0/). The file is unmodified.
+
+LongHealth and Long Code Arena are not included. They are downloaded
+(LongHealth) or built (scripts/build_lca_repo_completion.py) from their
+original sources, under their own licenses.
+
+Model-derived files
+-------------------
+The per-head budget files (head_budget_optimization/head_budgets/) and the
+Q-Filters vectors (qfilters/pile/) were computed from the activations of
+Qwen3-4B, Qwen3-4B-Instruct-2507, Qwen3-30B-A3B (Apache License 2.0),
+Llama-3.1-8B-Instruct and Gemma-3-12B-it. Built with Llama.
+Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright (c)
+Meta Platforms, Inc. All Rights Reserved. Gemma is provided under and subject
+to the Gemma Terms of Use found at ai.google.dev/gemma/terms.

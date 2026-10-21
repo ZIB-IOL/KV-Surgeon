@@ -1,0 +1,44 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  target_size:
+    value: 0.02
+  seed:
+    value: 0
+  n_articles:
+    value: 1
+  start_article:
+    value: 0
+  n_questions_per_article:
+    value: 10
+  compute_perplexity:
+    value: 1
+  eval_original:
+    value: false
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  batch_size:
+    value: 10
+  max_ratio_per_head:
+    value: 0.75
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-4B/optimized_agnostic.json"
+  query_config:
+    value: "ss-plus-repeat"
+  algorithm_config:
+    value: "kv_surgeon"
+  methods:
+    value: ["original", "kv_surgeon"]
+  log_dir:
+    value: "logs/qa_evaluation/smoke/algorithm_config"

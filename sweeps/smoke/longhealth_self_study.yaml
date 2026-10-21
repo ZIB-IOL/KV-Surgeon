@@ -1,0 +1,51 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: "kv_surgeon"
+  method_name:
+    value: "smoke"
+  target_size:
+    value: 0.02
+  seed:
+    value: 0
+  n_articles:
+    value: 1
+  start_article:
+    value: 0
+  n_questions_per_article:
+    value: 10
+  compute_perplexity:
+    value: 1
+  eval_original:
+    value: false
+  model_name:
+    value: "Qwen/Qwen3-4B-Instruct-2507"
+  dataset_name:
+    value: "longhealth5"
+  chunking:
+    value: "longhealth"
+  batch_size:
+    value: 5
+  max_model_len:
+    value: 131072
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-4B-Instruct-2507/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+  query_config:
+    value: "ss-plus-repeat"
+  log_dir:
+    value: "logs/qa_evaluation/smoke/longhealth_self_study"
+  method_kwargs:
+    values:
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}

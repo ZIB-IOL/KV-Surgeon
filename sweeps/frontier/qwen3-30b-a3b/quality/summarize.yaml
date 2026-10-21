@@ -1,0 +1,45 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: summarize
+  method_name:
+    value: summarize
+  eval_original:
+    value: false
+
+  target_size:
+    value: 0.1
+  seed:
+    values: [0, 1, 2, 3, 4]
+  prompt:
+    values:
+      - "Summarize the following text very concisely:\n\n{article_text}\n\nSummary:"
+      - "Summarize the following text:\n\n{article_text}\n\nSummary:"
+      - "Summarize the following text in depth:\n\n{article_text}\n\nSummary:"
+
+  model_name:
+    value: "Qwen/Qwen3-30B-A3B"
+  dataset_name:
+    value: "quality"
+  query_config:
+    value: "repeat"
+  n_articles:
+    value: 50
+  start_article:
+    value: 0
+  batch_size:
+    value: 10
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-30b-a3b/quality/summarize"

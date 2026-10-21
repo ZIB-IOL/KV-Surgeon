@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.bak
+
+# Run outputs
+logs/
+results/
+wandb/
+sweeps_*.txt
+
+# Regenerated or downloaded on first use
+data/reference_answers_cache/
+data/longhealth_benchmark_v5.json
+# Built by scripts/build_lca_repo_completion.py (contains third-party source code)
+data/lca_repo_completion.json
+
+# Paper sources are not part of this repository
+paper.tex
+math_commands.tex
+latex_stuff/
+
+# Editors and local tooling
+.vscode/
+.DS_Store
+.claude/
+
+# Local sweep bookkeeping and SLURM output
+sweeps.txt
+slurm_logs/

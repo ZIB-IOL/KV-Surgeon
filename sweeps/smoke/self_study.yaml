@@ -1,0 +1,61 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: "kv_surgeon"
+  method_name:
+    value: "smoke"
+  target_size:
+    value: 0.02
+  seed:
+    value: 0
+  n_articles:
+    value: 1
+  start_article:
+    value: 0
+  n_questions_per_article:
+    value: 10
+  compute_perplexity:
+    value: 1
+  eval_original:
+    value: false
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  batch_size:
+    value: 10
+  max_ratio_per_head:
+    value: 0.75
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-4B/optimized_agnostic.json"
+  query_config:
+    value: "ss-plus-repeat"
+  log_dir:
+    value: "logs/qa_evaluation/smoke/self_study"
+  method_kwargs:
+    values:
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "loo_evict", "score": "loo", "loo_eps": 0.001, "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "highest_attention_keys", "score_method": "rms", "beta_method": "nnls", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "c2_method": "lsq", "on_policy": true}
+      - {"algorithm": "omp", "nnls_iters": 0, "nnls_log_upper_bound": 7, "drop_key_beta_cutoff": -7, "c2_method": "lsq", "k_choice": 1, "nnls_interval": 1, "on_policy": true}
+      - {"algorithm": "omp", "nnls_iters": 0, "nnls_log_upper_bound": 7, "drop_key_beta_cutoff": -7, "c2_method": "lsq", "k_choice": 4, "nnls_interval": 2, "on_policy": true}
+      - {"algorithm": "greedy_evict", "objective": "surrogate", "pool_factor": 4.0, "block_size": 32, "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "greedy_evict", "objective": "exact", "pool_factor": 4.0, "block_size": 32, "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 1.0, "refresh_interval": 0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 64, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "refresh_mode": "consistent", "refresh_interval": 64, "refresh_mu_floor": 0.05, "pool_factor": 4.0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "refit": "v", "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "refit": "m", "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "refit": "none", "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "block_size": 32, "gamma0": 0.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "loo", "refit": "vm", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}
+      - {"algorithm": "loo_evict", "score": "loo", "loo_eps": 0.001, "refit": "none", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}

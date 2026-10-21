@@ -1,0 +1,10 @@
+{
+    "algorithm": "AM-HAK",
+    "score_method": "rms",
+    "nnls_iters": 2,
+    "nnls_lower_bound": 0.049787068367863944,
+    "nnls_upper_bound": 20.085536923187668,
+    "c2_method": "lsq",
+    "precomputed_budget_path": "head_budget_optimization/head_budgets/Qwen3-4B/optimized_agnostic.json",
+    "max_ratio_per_head": 0.75
+}

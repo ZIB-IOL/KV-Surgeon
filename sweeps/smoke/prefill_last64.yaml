@@ -1,0 +1,45 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: "loo_evict"
+  method_name:
+    value: "smoke"
+  target_size:
+    value: 0.02
+  seed:
+    value: 0
+  n_articles:
+    value: 1
+  start_article:
+    value: 0
+  n_questions_per_article:
+    value: 10
+  compute_perplexity:
+    value: 1
+  eval_original:
+    value: false
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  batch_size:
+    value: 10
+  max_ratio_per_head:
+    value: 0.75
+  query_config:
+    value: "context-prefill-last64"
+  log_dir:
+    value: "logs/qa_evaluation/smoke/prefill_last64"
+  method_kwargs:
+    values:
+      - {"algorithm": "loo_evict", "score": "obcache_k", "refit": "none", "loo_eps": 0.001, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": false}

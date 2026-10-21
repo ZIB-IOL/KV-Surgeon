@@ -1,0 +1,16 @@
+{
+    "algorithm": "KV-Surgeon",
+    "pool_factor": 4.0,
+    "block_size": 32,
+    "gamma0": 1.0,
+    "ridge": 0.01,
+    "refresh_interval": 0,
+    "pool_score": "loo",
+    "refit": "vm",
+    "c2_solver": "lstsq",
+    "nnls_iters": 2,
+    "nnls_lower_bound": 0.049787068367863944,
+    "nnls_upper_bound": 20.085536923187668,
+    "precomputed_budget_path": "head_budget_optimization/head_budgets/Qwen3-4B/optimized_agnostic.json",
+    "max_ratio_per_head": 0.75
+}

@@ -1,0 +1,51 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: original
+  method_name:
+    value: original
+  eval_original:
+    value: false
+
+  target_size:
+    value: 0.99
+  seed:
+    values: [0, 1, 2, 3, 4]
+  query_config:
+    value: "repeat"
+
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-4B-Instruct-2507/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "Qwen/Qwen3-4B-Instruct-2507"
+  max_model_len:
+    value: 131072
+  dataset_name:
+    value: "lca"
+  chunking:
+    value: "lqa_pack"
+  chunk_size:
+    value: 10000
+  n_articles:
+    value: 20
+  start_article:
+    value: 0
+  batch_size:
+    value: 1
+  compute_perplexity:
+    value: 0
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-4b/lca/original"

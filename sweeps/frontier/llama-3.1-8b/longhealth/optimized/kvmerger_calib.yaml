@@ -1,0 +1,64 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: kvmerger
+  method_name:
+    value: kvmerger_calib
+  eval_original:
+    value: false
+
+  target_size:
+    values: [0.01, 0.02, 0.05, 0.1, 0.2]
+  seed:
+    values: [0, 1, 2, 3, 4]
+
+  top_k_ratio:
+    value: 0.0
+  c2_method:
+    value: "merge"
+  beta_method:
+    value: "nnls"
+  nnls_iters:
+    value: 2
+  nnls_log_lower_bound:
+    value: -3
+  nnls_log_upper_bound:
+    value: 3
+  threshold_search_steps:
+    value: 20
+  on_policy:
+    value: true
+  query_config:
+    value: "repeat"
+
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Llama-3.1-8B-Instruct/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "meta-llama/Llama-3.1-8B-Instruct"
+  dataset_name:
+    value: "longhealth5"
+  chunking:
+    value: "longhealth"
+  n_articles:
+    value: 4
+  start_article:
+    value: 0
+  batch_size:
+    value: 5
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/llama-3.1-8b/longhealth/optimized/kvmerger_calib"

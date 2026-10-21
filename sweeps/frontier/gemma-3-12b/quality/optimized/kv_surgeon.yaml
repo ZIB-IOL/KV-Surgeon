@@ -1,0 +1,80 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: kv_surgeon
+  method_name:
+    value: kv_surgeon
+  eval_original:
+    value: false
+
+  target_size:
+    values: [0.01, 0.02, 0.05, 0.1, 0.2]
+  seed:
+    values: [0, 1, 2, 3, 4]
+
+  pool_factor:
+    value: 4.0
+  refresh_interval:
+    value: 0
+  block_size:
+    value: 32
+  gamma0:
+    value: 1.0
+  ridge:
+    value: 0.01
+  refresh_mu_floor:
+    value: 0.05
+  pool_score:
+    value: "loo"
+
+  refit:
+    value: "vm"
+  c2_solver:
+    value: "lstsq"
+  nnls_iters:
+    value: 2
+  nnls_log_lower_bound:
+    value: -3
+  nnls_log_upper_bound:
+    value: 3
+  score_max_queries:
+    value: 0
+  build_max_queries:
+    value: 0
+  fallback_threshold:
+    value: 1.0
+
+  on_policy:
+    value: true
+  query_config:
+    value: "ss-plus-repeat"
+
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/gemma-3-12b-it/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "google/gemma-3-12b-it"
+  dataset_name:
+    value: "quality"
+  n_articles:
+    value: 50
+  start_article:
+    value: 0
+  batch_size:
+    value: 20
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/gemma-3-12b/quality/optimized/kv_surgeon"

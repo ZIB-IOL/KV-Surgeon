@@ -1,0 +1,56 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: magnitude_evict
+  method_name:
+    value: streaming_llm
+  eval_original:
+    value: false
+
+  target_size:
+    values: [0.01, 0.02, 0.05, 0.1, 0.2]
+  seed:
+    values: [0, 1, 2, 3, 4]
+
+  score:
+    value: "recency"
+  n_sink:
+    value: 4
+  n_recent:
+    value: 0
+  query_config:
+    value: "repeat"
+
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-4B-Instruct-2507/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "Qwen/Qwen3-4B-Instruct-2507"
+  max_model_len:
+    value: 131072
+  dataset_name:
+    value: "longhealth5"
+  chunking:
+    value: "longhealth"
+  n_articles:
+    value: 4
+  start_article:
+    value: 0
+  batch_size:
+    value: 5
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-4b/longhealth/optimized/streaming"

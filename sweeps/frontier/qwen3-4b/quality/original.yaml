@@ -1,0 +1,40 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: original
+  method_name:
+    value: original
+  eval_original:
+    value: false
+
+  target_size:
+    value: 0.99
+  seed:
+    values: [0, 1, 2, 3, 4]
+
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  query_config:
+    value: "repeat"
+  n_articles:
+    value: 50
+  start_article:
+    value: 0
+  batch_size:
+    value: 20
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-4b/quality/original"

@@ -1,0 +1,58 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: highest_attention_keys
+  method_name:
+    value: h2o_calib
+  eval_original:
+    value: false
+
+  target_size:
+    values: [0.02]
+  seed:
+    values: [0, 1, 2, 3, 4]
+  query_config:
+    value: "repeat"
+
+  score_method:
+    value: mean
+  beta_method:
+    value: nnls
+  nnls_iters:
+    value: 2
+  nnls_log_lower_bound:
+    value: -3
+  nnls_log_upper_bound:
+    value: 3
+  c2_method:
+    value: lsq
+  on_policy:
+    value: true
+
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  n_articles:
+    value: 50
+  start_article:
+    value: 0
+  batch_size:
+    value: 20
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-4b/quality/uniform/h2o_calib"

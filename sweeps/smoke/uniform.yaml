@@ -1,0 +1,50 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: "global_highest_attention_keys"
+  method_name:
+    value: "smoke"
+  target_size:
+    value: 0.02
+  seed:
+    value: 0
+  n_articles:
+    value: 1
+  start_article:
+    value: 0
+  n_questions_per_article:
+    value: 10
+  compute_perplexity:
+    value: 1
+  eval_original:
+    value: false
+  model_name:
+    value: "Qwen/Qwen3-4B"
+  dataset_name:
+    value: "quality"
+  batch_size:
+    value: 10
+  max_ratio_per_head:
+    value: 0.75
+  query_config:
+    value: "repeat"
+  log_dir:
+    value: "logs/qa_evaluation/smoke/uniform"
+  method_kwargs:
+    values:
+      - {"algorithm": "global_highest_attention_keys", "score_method": "max", "beta_method": "zero", "c2_method": "direct"}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "truncated", "truncation_order": 2, "refit": "vm", "c2_solver": "cholesky", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 8192, "build_max_queries": 4096, "build_queries_per_key": 16, "fallback_threshold": 0.3, "score_chunk_size": 4096, "on_policy": true}
+      - {"algorithm": "kv_surgeon", "pool_factor": 4.0, "refresh_interval": 0, "block_size": 32, "gamma0": 1.0, "ridge": 0.01, "refresh_mu_floor": 0.05, "pool_score": "truncated", "truncation_order": 2, "refit": "none", "c2_solver": "cholesky", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 8192, "build_max_queries": 4096, "build_queries_per_key": 16, "fallback_threshold": 0.3, "score_chunk_size": 4096, "on_policy": true}
+      - {"algorithm": "highest_attention_keys", "score_method": "mean", "beta_method": "zero", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "c2_method": "direct", "on_policy": true}
+      - {"algorithm": "kvmerger", "top_k_ratio": 0.0, "c2_method": "merge", "beta_method": "zero", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "threshold_search_steps": 20, "on_policy": true}
+      - {"algorithm": "loo_evict", "score": "obcache_k", "loo_eps": 0.001, "refit": "none", "c2_solver": "lstsq", "nnls_iters": 2, "nnls_log_lower_bound": -3, "nnls_log_upper_bound": 3, "score_max_queries": 0, "build_max_queries": 0, "fallback_threshold": 1.0, "on_policy": true}

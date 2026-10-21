@@ -1,0 +1,60 @@
+program: main.py
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+
+parameters:
+  compaction_algorithm:
+    value: highest_attention_keys
+  method_name:
+    value: highest_attention_keys
+  eval_original:
+    value: false
+
+  target_size:
+    values: [0.01, 0.02, 0.05, 0.1, 0.2]
+  seed:
+    values: [0, 1, 2, 3, 4]
+  query_config:
+    values: ["ss-plus-repeat", "repeat"]
+
+  score_method:
+    value: rms
+  beta_method:
+    value: nnls
+  nnls_iters:
+    value: 2
+  nnls_log_lower_bound:
+    value: -3
+  nnls_log_upper_bound:
+    value: 3
+  c2_method:
+    value: lsq
+  on_policy:
+    value: true
+
+  precomputed_budget_path:
+    value: "head_budget_optimization/head_budgets/Qwen3-30B-A3B/optimized_agnostic.json"
+  max_ratio_per_head:
+    value: 0.75
+
+  model_name:
+    value: "Qwen/Qwen3-30B-A3B"
+  dataset_name:
+    value: "quality"
+  n_articles:
+    value: 50
+  start_article:
+    value: 0
+  batch_size:
+    value: 10
+  compute_perplexity:
+    value: 1
+  log_dir:
+    value: "logs/qa_evaluation/frontier/qwen3-30b-a3b/quality/optimized/am_hak"
